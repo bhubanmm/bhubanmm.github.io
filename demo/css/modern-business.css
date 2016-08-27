@@ -1,5 +1,5 @@
 /*!
- * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
+ * The East India <span>Tribes</span> - Modern Business HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
@@ -125,9 +125,15 @@ footer{
 
 /* The company logo */
 
-.footer-distributed h3, .navbar-brand {
+.footer-distributed h3 {
 	color:  #ffffff;
-	font: normal 36px 'Cookie', cursive;
+	font: normal 36px 'Lobster', cursive;
+	margin: 0;
+}
+
+.navbar-brand {
+	color:  #ffffff;
+	font: normal 20px 'Lobster', cursive;
 	margin: 0;
 }
 
