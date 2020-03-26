@@ -1,7 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title>Fluency Spinner - Feelings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="main.css" type="text/css" />
     <script type="text/javascript" src="Winwheel.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
@@ -44,22 +46,22 @@
                 'textFillStyle': 'red',
                 'segments': // Define segments.
                     [{
-                    'text': 'Sad'
-                }, {
-                    'text': 'Excited'
-                }, {
-                    'text': 'Scared'
-                }, {
-                    'text': 'Sleepy'
-                }, {
-                    'text': 'Angry'
-                }, {
-                    'text': 'Surprised'
-                }, {
-                    'text': 'Disappointed'
-                }, {
-                    'text': 'Happy'
-                }],
+                        'text': 'Sad'
+                    }, {
+                        'text': 'Excited'
+                    }, {
+                        'text': 'Scared'
+                    }, {
+                        'text': 'Sleepy'
+                    }, {
+                        'text': 'Angry'
+                    }, {
+                        'text': 'Surprised'
+                    }, {
+                        'text': 'Disappointed'
+                    }, {
+                        'text': 'Happy'
+                    }],
                 'animation': // Specify the animation to use.
                 {
                     'type': 'spinToStop',
@@ -73,7 +75,7 @@
             let loadedImg = new Image();
 
             // Create callback to execute once the image has finished loading.
-            loadedImg.onload = function() {
+            loadedImg.onload = function () {
                 theWheel.wheelImage = loadedImg; // Make wheelImage equal the loaded image object.
                 theWheel.draw(); // Also call draw function to render the wheel.
             }
