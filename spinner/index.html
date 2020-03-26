@@ -1,0 +1,129 @@
+<html>
+
+<head>
+    <title>Fluency Spinner - Feelings</title>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <script type="text/javascript" src="Winwheel.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+</head>
+
+<body>
+    <div align="center">
+        <h1>I can read with expression.</h1>
+        <h3>Spin the spinner. Read the words or sentences using the type of expression you land on.</h3>
+        <br />
+        <div>
+            <div>
+                <img id="spin_button" class="clickable" src="spin_on.png" alt="Spin" onClick="startSpin();" />
+                <h2>The wheel stopped on:
+                    <span style="color: blue" id="result">
+                </h2>
+            </div>
+            <div width="504" height="670" class="the_wheel">
+                <canvas id="canvas" width="504" height="670">
+                    <p style="color: white" align="center">Sorry, your browser doesn't support this. Please try
+                        another.</p>
+                </canvas>
+            </div>
+        </div>
+        <script>
+            // Create new wheel object specifying the parameters at creation time.
+            let theWheel = new Winwheel({
+                'numSegments': 8, // Specify number of segments.
+                'outerRadius': 250, // Set outer radius so wheel fits inside the background.
+                'drawMode': 'image', // drawMode must be set to image.
+                'drawText': true, // Need to set this true if want code-drawn text on image wheels.
+                'textFontSize': 16, // Set text options as desired.
+                'textOrientation': 'curved',
+                //'textDirection': 'reversed',
+                'textAlignment': 'outer',
+                'textMargin': 15,
+                'textFontFamily': 'monospace',
+                'textStrokeStyle': 'gray',
+                'textLineWidth': 1,
+                'textFillStyle': 'red',
+                'segments': // Define segments.
+                    [{
+                    'text': 'Sad'
+                }, {
+                    'text': 'Excited'
+                }, {
+                    'text': 'Scared'
+                }, {
+                    'text': 'Sleepy'
+                }, {
+                    'text': 'Angry'
+                }, {
+                    'text': 'Surprised'
+                }, {
+                    'text': 'Disappointed'
+                }, {
+                    'text': 'Happy'
+                }],
+                'animation': // Specify the animation to use.
+                {
+                    'type': 'spinToStop',
+                    'duration': 5, // Duration in seconds.
+                    'spins': 8, // Number of complete spins.
+                    'callbackFinished': alertPrize
+                }
+            });
+
+            // Create new image object in memory.
+            let loadedImg = new Image();
+
+            // Create callback to execute once the image has finished loading.
+            loadedImg.onload = function() {
+                theWheel.wheelImage = loadedImg; // Make wheelImage equal the loaded image object.
+                theWheel.draw(); // Also call draw function to render the wheel.
+            }
+
+            // Set the image source, once complete this will trigger the onLoad callback (above).
+            loadedImg.src = "spinner2.png";
+
+            var wheelSpinning = false;
+
+            // -------------------------------------------------------
+            // Click handler for spin button.
+            // -------------------------------------------------------
+            function startSpin() {
+                // Ensure that spinning can't be clicked again while already running.
+                if (wheelSpinning == false) {
+                    theWheel.rotationAngle = 0;
+                    theWheel.draw();
+
+                    // Disable the spin button so can't click again while wheel is spinning.
+                    document.getElementById('spin_button').src = "spin_off.png";
+                    document.getElementById('spin_button').className = "";
+
+                    // Begin the spin animation by calling startAnimation on the wheel object.
+                    theWheel.startAnimation();
+
+                    // Set to true so that power can't be changed and spin button re-enabled during
+                    // the current animation. The user will have to reset before spinning again.
+                    wheelSpinning = true;
+                }
+            }
+
+            // -------------------------------------------------------
+            // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
+            // note the indicated segment is passed in as a parmeter as 99% of the time you will want to know this to inform the user of their prize.
+            // -------------------------------------------------------
+            function alertPrize(indicatedSegment) {
+                // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
+                // alert("The wheel stopped on " + indicatedSegment.text);
+
+                // High Power
+                theWheel.animation.spins = 8;
+                theWheel.animation.duration = 5;
+                wheelSpinning = false;
+                theWheel.draw();
+
+                document.getElementById('result').innerHTML = indicatedSegment.text;
+                document.getElementById('spin_button').src = "spin_on.png";
+                document.getElementById('spin_button').className = "clickable";
+            }
+        </script>
+</body>
+
+</html>
